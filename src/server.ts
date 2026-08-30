@@ -125,7 +125,8 @@ function createServer() {
 
 const app = express();
 app.use(express.json({ limit: "1mb" }));
-app.get("/health", (_req, res) => res.json({ name: "PromptLikho", status: "ok", version: "1.0.0" }));
+app.get("/", (_req, res) => res.status(200).type("text").send("PromptLikho MCP server is running. Health: /health | MCP: /mcp"));
+app.get("/health", (_req, res) => res.status(200).json({ name: "PromptLikho", status: "ok", version: "1.0.0" }));
 app.all("/mcp", async (req, res) => {
   const server = createServer();
   const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined });
@@ -133,7 +134,8 @@ app.all("/mcp", async (req, res) => {
   try {
     await server.connect(transport);
     await transport.handleRequest(req, res, req.body);
-  } catch {
+  } catch (error) {
+    console.error("MCP request failed", error);
     if (!res.headersSent) res.status(500).json({ error: "MCP request failed" });
   }
 });
