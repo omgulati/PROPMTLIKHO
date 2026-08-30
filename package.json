@@ -1,0 +1,1 @@
+{"name":"promptlikho","version":"1.0.0","private":true,"type":"module","scripts":{"build":"tsc","start":"node dist/server.js","dev":"tsx src/server.ts"},"dependencies":{"@modelcontextprotocol/sdk":"^1.17.0","express":"^5.1.0","zod":"^3.25.76"},"devDependencies":{"@types/express":"^5.0.3","@types/node":"^22.15.30","tsx":"^4.20.3","typescript":"^5.8.3"},"engines":{"node":">=20"}}
